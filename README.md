@@ -8,6 +8,7 @@ A Python CLI application that helps you create properly-tagged local music colle
 
 ## Features
 
+✅ **Smart CSV Mapping** - Auto-detects and fixes column name variations  
 ✅ **CSV Playlist Support** - Works with standard Spotify export formats  
 ✅ **Smart Skip** - Resume interrupted downloads automatically  
 ✅ **Rich Metadata** - Embeds Title, Artist, Album, and Cover Art  
@@ -42,7 +43,11 @@ Download from [ffmpeg.org](https://ffmpeg.org/download.html) and add to PATH
 
 ## Installation
 
-1. **Clone or download this project**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/MUmer24/PlaylistTagger-CSV-Edition.git
+   cd PlaylistTagger-CSV-Edition
+   ```
 
 2. **Create a virtual environment (recommended):**
    ```bash
@@ -63,11 +68,16 @@ Download from [ffmpeg.org](https://ffmpeg.org/download.html) and add to PATH
 
 Export your Spotify playlist using a tool like [Exportify](https://watsonbox.github.io/exportify/).
 
-Your CSV must have these headers:
-- `Track Name`
-- `Artist Name`
-- `Album Name`
-- `Album Image URL`
+**Required Data (Flexible Column Names):**
+
+The script automatically detects and maps common column name variations. Your CSV needs these data fields, but the exact column names are flexible:
+
+- **Track Name** (alt: `Song Name`, `Title`, `Track`, etc.)
+- **Artist Name** (alt: `Artist`, `Artist(s)`, `Artists`, etc.)
+- **Album Name** (alt: `Album`, etc.)
+- **Album Image URL** (alt: `Cover Art`, `Image URL`, `Cover`, etc.)
+
+> 💡 **Smart Mapping:** The script will automatically detect and rename columns like `"Song Name"` → `"Track Name"` or `"Artist(s)"` → `"Artist Name"` when you run it.
 
 Save the file as `playlist.csv` in the project folder.
 
@@ -120,6 +130,37 @@ Default settings in `main.py`:
 ---
 
 ## Features in Detail
+
+### Smart CSV Mapping
+
+The script includes intelligent CSV validation that automatically handles different export formats:
+
+**Auto-Detection:**
+- Recognizes 20+ common column name variations
+- Maps variations like `"Song Name"`, `"Title"`, `"Track"` → `"Track Name"`
+- Handles both exact matches and case-insensitive variations
+
+**What You See:**
+```
+📋 CSV Validation & Column Mapping
+==================================================
+✓ CSV loaded successfully: 150 rows found
+
+🔍 Column Mapping Results:
+--------------------------------------------------
+✓ 'Track Name' (already correct)
+✓ 'Artist Name(s)' → 'Artist Name' (renamed)
+✓ 'Album Name' (already correct)
+✓ 'Album Image URL' (already correct)
+
+✅ CSV Validation Complete!
+✅ Ready to process 150 tracks
+```
+
+**Validation Checks:**
+- Verifies all required columns are present
+- Reports empty or invalid rows
+- Shows data quality statistics before processing
 
 ### Smart Skip (Resumability)
 
@@ -273,24 +314,45 @@ This tool is provided for educational purposes and personal music library manage
 
 ---
 
-## Contributing
+## Contributing & Support
 
-This project is provided as-is for educational and personal use.
+This is a complete, self-contained project provided for educational and personal use.
+
+**Found a bug or have a suggestion?**
+- Fork this repository and submit a pull request
+- Open an issue for discussion
+
+**For questions or help:**
+- Check the Troubleshooting section above
+- Review existing issues on GitHub
 
 ---
 
-## Contributing
+## Credits & Technologies
 
-This is a complete, self-contained project. Feel free to fork and modify for your needs!
+**Built with:**
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp) - YouTube downloader and extractor
+- [mutagen](https://mutagen.readthedocs.io/) - Audio metadata library for Python
+- [pandas](https://pandas.pydata.org/) - Data processing and CSV handling
+- [requests](https://requests.readthedocs.io/) - HTTP library for cover art downloads
+- [tqdm](https://tqdm.github.io/) - Progress bar functionality
+
+**Special Thanks:**
+- [Exportify](https://watsonbox.github.io/exportify/) - Spotify playlist export tool
+- [FFmpeg](https://ffmpeg.org/) - Multimedia framework for audio conversion
 
 ---
 
-## Credits
+## License
 
-Built with:
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) - YouTube downloader
-- [mutagen](https://mutagen.readthedocs.io/) - Audio metadata library
-- [pandas](https://pandas.pydata.org/) - Data processing
+This project is open source and available under the [MIT License](LICENSE).
+
+You are free to:
+- Use this software for personal or commercial purposes
+- Modify and distribute the code
+- Include it in your own projects
+
+**However:** Users are responsible for ensuring their use complies with applicable copyright laws and terms of service for content sources.
 
 ---
 
