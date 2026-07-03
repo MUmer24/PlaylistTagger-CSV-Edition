@@ -17,7 +17,9 @@ from typing import Optional
 import pandas as pd
 import requests
 import yt_dlp
+# pyrefly: ignore [missing-import]
 from mutagen.id3 import ID3, TIT2, TPE1, TALB, APIC, TRCK, TPOS, TSRC
+# pyrefly: ignore [missing-import]
 from mutagen.mp3 import MP3
 from tqdm import tqdm
 
